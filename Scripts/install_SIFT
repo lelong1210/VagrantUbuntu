@@ -1,0 +1,24 @@
+#!/bin/bash
+
+echo "================> INSTALL GO <================" 
+
+wget https://dl.google.com/go/go1.19.4.linux-amd64.tar.gz
+sudo tar -xvf go1.19.4.linux-amd64.tar.gz
+sudo mv go /usr/local
+export GOROOT=/usr/local/go
+export GOPATH=$HOME/Projects/Proj1
+export PATH=$GOPATH/bin:$GOROOT/bin:$PATH
+
+go version
+
+echo "================> SIFT <================" 
+
+go install github.com/sigstore/cosign/cmd/cosign@latest
+cosign verify-blob --key /vagrant/sift-cli.pub --signature /vagrant/sift-cli-linux.sig /vagrant/sift-cli-linux
+sudo cp /vagrant/sift-cli-linux /usr/local/bin/sift
+chmod 755 /usr/local/bin/sift
+
+sudo apt-get update
+sudo sift install
+
+sudo cast install --mode server sift

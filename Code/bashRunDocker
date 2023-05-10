@@ -1,0 +1,11 @@
+#!/bin/bash
+
+docker run --rm -it --entrypoint "/bin/bash" remnux/thug
+docker run -it --rm -v ~/workdir:/home/nonroot/workdir remnux/binary-refinery
+docker run -d --rm --name jsdetox -p 3000:3000 remnux/jsdetox
+docker run -d --rm -p 4000:4000 -p 35729:35729 --name de4js remnux/de4js
+docker run --rm -it -v <files_directory>:/home/nonroot/files remnux/rekall bash
+docker run -it --rm -v <files_directory>:/tmp/files remnux/retdec bash
+docker run --rm -it -v ~/workdir:/home/nonroot/workdir remnux/rizin
+docker run --rm -it -v ~/workdir:/home/nonroot/workdir remnux/radare2
+docker run -it --rm -v ~/workdir:/home/nonroot/workdir remnux/viper
